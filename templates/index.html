@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style> .brand-icon { color: #FFD700; } </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="bi bi-check2-square brand-icon"></i> Quantum Tracker</a>
+            <div class="ms-auto">
+                <a href="{{ url_for('login') }}" class="btn btn-outline-secondary me-2">Acessar meu Painel</a>
+                <a href="{{ url_for('register') }}" class="btn btn-primary">Começar Minha Jornada</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center py-5">
+        <i class="bi bi-check2-square display-1 brand-icon mb-3"></i>
+        <h1 class="display-4">Bem-vindo ao Quantum Tracker</h1>
+        <p class="lead col-md-8 mx-auto">Materialize suas intenções. Transforme metas em realidade quântica, um passo de cada vez.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg px-4 gap-3">Começar Minha Jornada</a>
+            <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-lg px-4">Acessar meu Painel</a>
+        </div>
+    </div>
+    <div class="container">
+      <footer class="py-3 my-4"> <p class="text-center text-muted">© 2025 Quantum Tracker.</p> </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

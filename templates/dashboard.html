@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Quantum Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .brand-icon { color: #FFD700; }
+        .task-completed { text-decoration: line-through; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('dashboard') }}"><i class="bi bi-check2-square brand-icon"></i> Quantum Tracker</a>
+            <div class="ms-auto">
+                <span class="navbar-text me-3">Olá, {{ user.username }}</span>
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <!-- Formulário para Adicionar Novas Metas -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form method="POST" action="">
+                            {{ form.hidden_tag() }}
+                            <div class="input-group">
+                                {{ form.content(class="form-control", placeholder="Qual intenção você vai materializar hoje?") }}
+                                {{ form.submit(class="btn btn-primary") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Lista de Metas Existentes -->
+                <h2 class="mb-3">Suas Metas Ativas</h2>
+                <ul class="list-group">
+                    {% for task in tasks %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="{{ 'task-completed' if task.completed else '' }}">{{ task.content }}</span>
+                            <div>
+                                <a href="{{ url_for('toggle_task', task_id=task.id) }}" class="btn btn-sm {{ 'btn-secondary' if task.completed else 'btn-success' }}">
+                                    <i class="bi {{ 'bi-arrow-counterclockwise' if task.completed else 'bi-check-lg' }}"></i>
+                                </a>
+                                <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">Você ainda não materializou nenhuma meta. Comece agora!</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
