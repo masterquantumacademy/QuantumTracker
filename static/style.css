@@ -1,0 +1,102 @@
+/* --- Arquivo: static/style.css --- */
+
+/* 1. Importação da Fonte e Definição das Variáveis de Cor */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --quantum-dark-purple: #000b1b; /* Fundo principal, mais escuro */
+    --quantum-purple: #003c58;      /* Cor de cards e elementos */
+    --quantum-cyan: #cfe6ee;        /* Cor de destaque principal (botões primários) */
+    --quantum-gold: #FFD700;        /* Cor de ícones e destaques secundários */
+    --quantum-light-text: #e6f1ff; /* Cor do texto principal */
+    --quantum-muted-text: #8b8b9b;  /* Cor de textos secundários */
+}
+
+/* 2. Estilos Globais */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--quantum-dark-purple);
+    color: var(--quantum-light-text);
+}
+
+.card {
+    background-color: var(--quantum-purple);
+    border: 1px solid #00334d; /* Uma borda sutil para definir o card */
+}
+
+/* 3. Estilos dos Botões */
+.btn-primary {
+    background-color: var(--quantum-cyan);
+    border-color: var(--quantum-cyan);
+    color: #120c1c; /* Texto escuro para contraste no ciano */
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    border-color: white;
+    color: #120c1c;
+    transform: translateY(-2px); /* Efeito sutil de elevação */
+    box-shadow: 0 4px 15px rgba(0, 246, 255, 0.3);
+}
+
+.btn-outline-secondary {
+    border-color: var(--quantum-muted-text);
+    color: var(--quantum-muted-text);
+    font-weight: 600;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--quantum-muted-text);
+    border-color: var(--quantum-muted-text);
+    color: white;
+}
+
+/* 4. Estilo dos Ícones Dourados */
+.brand-icon {
+    color: var(--quantum-gold);
+}
+
+/* --- Adicione no final do static/style.css --- */
+
+/* 5. Estilos Específicos do Dashboard */
+.quantum-task-item {
+    background-color: var(--quantum-purple);
+    border-color: #00334d;
+    padding: 1rem 1.25rem;
+    font-size: 1.1rem;
+    color: var(--quantum-light-text);
+}
+
+.task-completed {
+    text-decoration: line-through;
+    color: var(--quantum-muted-text);
+}
+
+.btn-action {
+    background: none;
+    border: none;
+}
+
+.btn-action i { /* Estilo aplicado diretamente ao ícone */
+    font-size: 1.5rem;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+}
+
+.btn-action:hover i {
+    transform: scale(1.2);
+}
+
+.btn-complete i { color: #198754; } /* Verde */
+.btn-reactivate i { color: #6c757d; } /* Cinza */
+.btn-delete i { color: #dc3545; } /* Vermelho */
+
+/* --- Adicione no final do static/style.css --- */
+
+/* 6. Estilo do Logo Principal */
+.hero-logo {
+    max-width: 150px; /* Define a largura máxima do logo */
+    height: auto;     /* Garante que a altura se ajuste proporcionalmente */
+}

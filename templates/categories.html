@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Categorias - Quantum Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('dashboard') }}"><i class="bi bi-check2-square brand-icon"></i> Quantum Tracker</a>
+            <div class="ms-auto">
+                <span class="navbar-text me-3">Olá, {{ user.username }}</span>
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2>Gerenciar Categorias</h2>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Voltar ao Painel</a>
+                </div>
+                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <!-- Formulário para Nova Categoria -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form method="POST" action="{{ url_for('add_category') }}">
+                            {{ form.hidden_tag() }}
+                            <div class="input-group">
+                                {{ form.name(class="form-control", placeholder="Nome da nova categoria") }}
+                                {{ form.submit(class="btn btn-primary") }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Lista de Categorias Existentes -->
+                <h3 class="mb-3">Suas Categorias</h3>
+                <ul class="list-group">
+                    {% for category in categories %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center quantum-task-item">
+                        {{ category.name }}
+                        <a href="{{ url_for('delete_category', category_id=category.id) }}" class="btn-action btn-delete">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="list-group-item quantum-task-item">Nenhuma categoria criada.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
